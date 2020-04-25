@@ -4,10 +4,12 @@
   "description": "Serverless typescript functions",
   "main": "handler.js",
   "scripts": {
-    "local:server": "tsc && sls offline"
+    "local:server": "tsc && sls offline",
+    "local:db": "sls dynamodb start --migrate"
   },
   "dependencies": {
-    "serverless-dynamodb-local": "^0.2.39",
+    "aws-sdk": "^2.662.0",
+    "serverless-dynamodb-local": "0.2.38",
     "serverless-offline": "^6.1.4",
     "source-map-support": "^0.5.10"
   },

@@ -1,13 +1,38 @@
 service:
   name: serverless-dynamo
 
+custom:
+  dynamodb:
+    stages:
+      - dev
+
 plugins:
-  - serverless-dynamodb-local
   - serverless-offline
+  - serverless-dynamodb-local
 
 provider:
   name: aws
   runtime: nodejs12.x
+
+resources:
+  Resources:
+    tasksTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: tasks
+        AttributeDefinitions:
+          - AttributeName: owner
+            AttributeType: S
+          - AttributeName: taskDefinition
+            AttributeType: S
+        KeySchema:
+          - AttributeName: owner
+            KeyType: HASH
+          - AttributeName: taskDefinition
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
 
 functions:
   hello:
@@ -16,3 +41,9 @@ functions:
       - http:
           method: get
           path: hello
+  add-task:
+    handler: build/add-task.add
+    events:
+      - http:
+          method: put
+          path: add
