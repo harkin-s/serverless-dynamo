@@ -21,14 +21,14 @@ resources:
       Properties:
         TableName: tasks
         AttributeDefinitions:
-          - AttributeName: owner
+          - AttributeName: id
             AttributeType: S
-          - AttributeName: taskDefinition
+          - AttributeName: creator
             AttributeType: S
         KeySchema:
-          - AttributeName: owner
+          - AttributeName: id
             KeyType: HASH
-          - AttributeName: taskDefinition
+          - AttributeName: creator
             KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1
@@ -36,11 +36,11 @@ resources:
 
 functions:
   hello:
-    handler: build/handler.hello
+    handler: build/list-tasks.list
     events:
       - http:
           method: get
-          path: hello
+          path: list
   add-task:
     handler: build/add-task.add
     events:

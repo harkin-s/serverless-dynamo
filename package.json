@@ -8,6 +8,8 @@
     "local:db": "sls dynamodb start --migrate"
   },
   "dependencies": {
+    "@aws/dynamodb-data-mapper": "^0.7.3",
+    "@aws/dynamodb-data-mapper-annotations": "^0.7.3",
     "aws-sdk": "^2.662.0",
     "serverless-dynamodb-local": "0.2.38",
     "serverless-offline": "^6.1.4",

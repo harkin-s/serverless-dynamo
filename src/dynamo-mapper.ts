@@ -1,4 +1,5 @@
 import {DynamoDB} from "aws-sdk"
+import {DataMapper} from '@aws/dynamodb-data-mapper';
 
 let db = null
 export async function getConnection(): Promise<DynamoDB>{
@@ -9,10 +10,9 @@ export async function getConnection(): Promise<DynamoDB>{
             endpoint: "http://localhost:8000"
         });
 
-        return db;
-    } else{
-        return db;
-    }
-
-   
+       
+    } 
+        
+    return db;
+    
 }
