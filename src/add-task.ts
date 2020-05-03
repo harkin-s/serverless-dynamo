@@ -1,12 +1,12 @@
 
-import { APIGatewayProxyHandler } from 'aws-lambda';
-import { getConnection } from './dynamo-mapper';
+import { APIGatewayProxyHandler, APIGatewayProxyResult } from 'aws-lambda';
+import { getConnection } from './dynamo-connection';
 import {Task} from "./task-class"
 
-export const add: APIGatewayProxyHandler = async (event, _context) => {
+export const add: APIGatewayProxyHandler = async (event, _context): Promise<APIGatewayProxyResult> => {
 
-    const {creator = null, taskDefinition = null} = JSON.parse(event.body);   
-    const {statusCode, body} = await addTask({creator, taskDefinition});
+    const task = new Task(JSON.parse(event.body));   
+    const {statusCode, body} = await addTask(task);
 
     return {
     statusCode,
@@ -14,9 +14,9 @@ export const add: APIGatewayProxyHandler = async (event, _context) => {
   };
 }
 
-async function addTask({creator, taskDefinition}){
+async function addTask(task: Task){
 
-    if(creator === null || taskDefinition === null){
+    if(task.creator === null || task.taskDefinition === null){
         return {
             statusCode: 400,
             body: JSON.stringify("Null values found")
@@ -25,15 +25,11 @@ async function addTask({creator, taskDefinition}){
     
     try{
         const db = await getConnection();
-        const task = new Task(creator, taskDefinition);
 
-        await db.putItem({
-            TableName: 'tasks',
-            Item: {
-                'id': {S: task.id}, 
-                'creator' : {S: task.creator}, 
-                'taskDefinition' : {S: task.taskDefinition}
-            }
+        await db.put({
+            Item: task,
+            TableName: "tasks"
+
         }).promise()
 
         return {

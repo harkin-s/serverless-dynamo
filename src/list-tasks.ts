@@ -1,5 +1,5 @@
 import { APIGatewayProxyHandler } from "aws-lambda";
-import { getConnection } from "./dynamo-mapper";
+import { getConnection } from "./dynamo-connection";
 
 export const list: APIGatewayProxyHandler = async (event, _context) => {
 
@@ -19,13 +19,20 @@ async function listTasks(creator: string){
         const db = await getConnection();
 
         const params = {
+            TableName: "tasks",
+            ProjectionExpression: "#cr, taskDefinition",
+            FilterExpression: "#cr equals :creator ",
+            ExpressionAttributeNames: {
+                "#cr": "creator",
+            },
             ExpressionAttributeValues: {
-                ':c': {S: creator}
-              },
-            KeyConditionExpression: 'creator = :c',
-            TableName: "tasks"
+                ":creator": creator
+            }
         }
-        const tasks = await db.scan(params).promise()
+
+        const tasks = await db.scan(params, function(err, data){
+            console.log(err, data)
+        })
 
         return {
             statusCode: 200,
