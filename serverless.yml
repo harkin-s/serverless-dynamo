@@ -52,6 +52,8 @@ functions:
   list-tasks:
     handler: build/list-tasks.list
     memorySize: 128
+    environment:
+      NODE_ENV: ${opt:stage}
     events:
       - http:
           method: get
@@ -59,6 +61,8 @@ functions:
   add-task:
     handler: build/add-task.add
     memorySize: 128
+    environment:
+      NODE_ENV: ${opt:stage}
     events:
       - http:
           method: put
@@ -66,6 +70,8 @@ functions:
   remove-task:
     handler: build/remove-task.remove
     memorySize: 128
+    environment:
+      NODE_ENV: ${opt:stage}
     events:
       - http:
           method: delete
