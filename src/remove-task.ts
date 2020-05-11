@@ -1,6 +1,7 @@
 
 import { APIGatewayProxyHandler, APIGatewayProxyResult } from 'aws-lambda';
 import { getConnection } from './dynamo-connection';
+import { tableName } from './config';
 
 export const remove: APIGatewayProxyHandler = async (event, _context): Promise<APIGatewayProxyResult> => {
 
@@ -25,7 +26,7 @@ async function addTask(creator: string, id: string){
     try{
         const db = await getConnection();
         const params = {
-            TableName : 'tasks',
+            TableName : tableName,
             Key: {
               id,
               creator

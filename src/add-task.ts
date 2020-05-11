@@ -2,6 +2,7 @@
 import { APIGatewayProxyHandler, APIGatewayProxyResult } from 'aws-lambda';
 import { getConnection } from './dynamo-connection';
 import {Task} from "./task-class"
+import { tableName } from './config';
 
 export const add: APIGatewayProxyHandler = async (event, _context): Promise<APIGatewayProxyResult> => {
 
@@ -25,8 +26,8 @@ async function addTask(task: Task){
     
     try{
         const db = await getConnection();
-
-        await db.put({Item: task, TableName: "tasks"}).promise()
+        console.log(tableName)
+        await db.put({Item: task, TableName: tableName}).promise()
 
         return {
             statusCode: 200,

@@ -4,8 +4,8 @@
   "description": "Serverless typescript functions",
   "main": "handler.js",
   "scripts": {
-    "local:server": "tsc && sls offline",
-    "local:db": "sls dynamodb start --migrate",
+    "local:server": "tsc && NODE_ENV=dev sls offline --stage dev",
+    "local:db": "sls dynamodb start --migrate --stage dev",
     "ci:deploy": "tsc && NODE_ENV=live serverless deploy --stage live "
   },
   "dependencies": {
