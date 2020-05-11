@@ -33,7 +33,7 @@ resources:
     tasksTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: tasks
+        TableName: ${opt:stage}-tasks
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
