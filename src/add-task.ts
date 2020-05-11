@@ -39,7 +39,4 @@ async function addTask(task: Task){
             body: JSON.stringify("Error adding item")
         }
     }
-    
-
-
 }
