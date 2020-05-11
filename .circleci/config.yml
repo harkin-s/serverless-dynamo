@@ -5,3 +5,4 @@ jobs:
       - image: circleci/node:stretch
     steps:
         - checkout
+        - run: yarn
