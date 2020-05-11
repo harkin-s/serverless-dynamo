@@ -6,3 +6,4 @@ jobs:
     steps:
         - checkout
         - run: yarn
+        - run: serverless delpoy
