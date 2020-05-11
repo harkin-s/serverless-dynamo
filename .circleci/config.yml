@@ -7,4 +7,4 @@ jobs:
         - checkout
         - run: sudo npm i -g serverless
         - run: yarn
-        - run: serverless delpoy
+        - run: serverless deploy
