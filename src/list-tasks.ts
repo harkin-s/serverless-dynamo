@@ -17,28 +17,19 @@ async function listTasks(creator: string){
     try{
 
         const db = await getConnection();
-
         const params = {
-            TableName: "tasks",
-            ProjectionExpression: "#cr, taskDefinition",
-            FilterExpression: "#cr equals :creator ",
-            ExpressionAttributeNames: {
-                "#cr": "creator",
-            },
-            ExpressionAttributeValues: {
-                ":creator": creator
+            TableName : 'tasks',
+            KeyConditionExpression : 'creator = :cr',
+            ExpressionAttributeValues : {
+                ':cr' : creator     
             }
         }
-
-        const tasks = await db.scan(params, function(err, data){
-            console.log(err, data)
-        })
+        const {Items = []} = await db.query(params).promise();
 
         return {
             statusCode: 200,
-            body: JSON.stringify(tasks)
-        };
-        
+            body: JSON.stringify(Items)
+        }
         
     } catch(error){
         console.error(error)

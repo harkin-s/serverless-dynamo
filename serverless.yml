@@ -26,16 +26,16 @@ resources:
           - AttributeName: creator
             AttributeType: S
         KeySchema:
-          - AttributeName: id
-            KeyType: HASH
           - AttributeName: creator
+            KeyType: HASH
+          - AttributeName: id
             KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
 
 functions:
-  hello:
+  list-tasks:
     handler: build/list-tasks.list
     events:
       - http:
@@ -47,3 +47,9 @@ functions:
       - http:
           method: put
           path: add
+  remove-task:
+    handler: build/remove-task.remove
+    events:
+      - http:
+          method: delete
+          path: remove

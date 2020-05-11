@@ -26,11 +26,7 @@ async function addTask(task: Task){
     try{
         const db = await getConnection();
 
-        await db.put({
-            Item: task,
-            TableName: "tasks"
-
-        }).promise()
+        await db.put({Item: task, TableName: "tasks"}).promise()
 
         return {
             statusCode: 200,
