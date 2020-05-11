@@ -14,6 +14,7 @@ provider:
   name: aws
   runtime: nodejs12.x
   region: eu-west-1
+  stage: ${opt:stage, 'dev'}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -24,7 +25,8 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: arn:aws:dynamodb:eu-west-1:615705620941:table/tasks
+      Resource:
+        - "Fn::GetAtt": [tasksTable, Arn ]
 
 resources:
   Resources:

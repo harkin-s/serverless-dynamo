@@ -1,16 +1,15 @@
 import { DynamoDB } from "aws-sdk"
 import { DocumentClient } from 'aws-sdk/lib/dynamodb/document_client';
+import { remoteDBConfig,localDBConfig } from "./config";
 
 
-//TODO Add remote connection config
+
 let db = null
-export async function getConnection(): Promise<DocumentClient>{
+const dbConfig = process.env.NODE_ENV === 'live' ? remoteDBConfig : localDBConfig
 
+export async function getConnection(): Promise<DocumentClient>{
     if(db === null){
-        db = new DynamoDB.DocumentClient({
-            // endpoint: "http://localhost:8000"
-            region: "eu-west-1"
-        });
+        db = new DynamoDB.DocumentClient(dbConfig);
     } 
         
     return db;

@@ -6,7 +6,7 @@
   "scripts": {
     "local:server": "tsc && sls offline",
     "local:db": "sls dynamodb start --migrate",
-    "ci:build": "tsc"
+    "ci:deploy": "tsc && NODE_ENV=live serverless deploy --stage live "
   },
   "dependencies": {
     "@aws/dynamodb-data-mapper": "^0.7.3",
