@@ -5,6 +5,6 @@ jobs:
       - image: circleci/node:stretch
     steps:
         - checkout
+        - run: sudo npm i -g serverless
         - run: yarn
-        - run: npm i -g serverless
         - run: serverless delpoy
