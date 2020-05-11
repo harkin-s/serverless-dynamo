@@ -5,7 +5,8 @@
   "main": "handler.js",
   "scripts": {
     "local:server": "tsc && sls offline",
-    "local:db": "sls dynamodb start --migrate"
+    "local:db": "sls dynamodb start --migrate",
+    "ci:build": "tsc"
   },
   "dependencies": {
     "@aws/dynamodb-data-mapper": "^0.7.3",
