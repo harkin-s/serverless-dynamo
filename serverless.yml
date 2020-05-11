@@ -24,8 +24,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource:
-        - "Fn::GetAtt": [tasksTable, Arn ]
+      Resource: arn:aws:dynamodb:eu-west-1:615705620941:table/tasks
 
 resources:
   Resources:
