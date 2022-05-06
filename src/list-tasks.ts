@@ -4,8 +4,8 @@ import { tableName } from "./config";
 
 export const list: APIGatewayProxyHandler = async (event, _context) => {
 
-    const queryParams = event.queryStringParameters;
-    const { statusCode, body } = queryParams.creator === undefined ? await listAllTasks() : await listTasks(queryParams.creator)
+    const { creator = undefined } = event.queryStringParameters;
+    const { statusCode, body } = creator !== undefined ? await listTasks(creator) : await listAllTasks()
 
     return {
         statusCode,
