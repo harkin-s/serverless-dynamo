@@ -13,9 +13,9 @@ provider:
   name: aws
   runtime: nodejs12.x
   region: eu-west-1
+  cors: true
   stage: ${opt:stage, 'dev'}
   iamRoleStatements:
-  cors: true
     - Effect: Allow
       Action:
         - dynamodb:DescribeTable
