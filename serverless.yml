@@ -15,6 +15,7 @@ provider:
   region: eu-west-1
   stage: ${opt:stage, 'dev'}
   iamRoleStatements:
+  cors: true
     - Effect: Allow
       Action:
         - dynamodb:DescribeTable
