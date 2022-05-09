@@ -30,8 +30,9 @@ async function listTasks(creator: string) {
             statusCode: 200,
             body: JSON.stringify(Items),
             headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Credentials': true,
+                "Access-Control-Allow-Headers": "Content-Type",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
             },
         }
 
@@ -41,8 +42,9 @@ async function listTasks(creator: string) {
             statusCode: 500,
             body: "Server error",
             headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Credentials': true,
+                "Access-Control-Allow-Headers": "Content-Type",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
             },
         };
 
@@ -68,8 +70,9 @@ async function listAllTasks() {
             statusCode: 200,
             body: JSON.stringify(scanResults),
             headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Credentials': true,
+                "Access-Control-Allow-Headers": "Content-Type",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
             },
         }
 
@@ -79,8 +82,9 @@ async function listAllTasks() {
             statusCode: 500,
             body: "Server error",
             headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Credentials': true,
+                "Access-Control-Allow-Headers": "Content-Type",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
             },
         };
 

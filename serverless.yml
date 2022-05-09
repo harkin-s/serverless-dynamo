@@ -13,7 +13,6 @@ provider:
   name: aws
   runtime: nodejs12.x
   region: eu-west-1
-  cors: true
   stage: ${opt:stage, 'dev'}
   iamRoleStatements:
     - Effect: Allow
@@ -58,15 +57,7 @@ functions:
       - http:
           method: get
           path: list
-          cors:
-            origin: '*'
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-            allowCredentials: false
+          cors: true
   add-task:
     handler: build/add-task.add
     memorySize: 128
@@ -76,15 +67,7 @@ functions:
       - http:
           method: put
           path: add
-          cors:
-            origin: '*'
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-            allowCredentials: false
+          cors: true
   remove-task:
     handler: build/remove-task.remove
     memorySize: 128
@@ -94,12 +77,4 @@ functions:
       - http:
           method: delete
           path: remove
-          cors:
-            origin: '*'
-            headers:
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-            allowCredentials: false
+          cors: true
