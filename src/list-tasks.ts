@@ -28,14 +28,22 @@ async function listTasks(creator: string) {
         const { Items = [] } = await db.query(params).promise();
         return {
             statusCode: 200,
-            body: JSON.stringify(Items)
+            body: JSON.stringify(Items),
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': true,
+            },
         }
 
     } catch (error) {
         console.error(error)
         return {
             statusCode: 500,
-            body: "Server error"
+            body: "Server error",
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': true,
+            },
         };
 
     }
@@ -58,15 +66,22 @@ async function listAllTasks() {
 
         return {
             statusCode: 200,
-            body: JSON.stringify(scanResults)
+            body: JSON.stringify(scanResults),
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': true,
+            },
         }
 
 
     } catch (error) {
-        console.error(error)
         return {
             statusCode: 500,
-            body: "Server error"
+            body: "Server error",
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': true,
+            },
         };
 
     }

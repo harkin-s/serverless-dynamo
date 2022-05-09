@@ -57,6 +57,7 @@ functions:
       - http:
           method: get
           path: list
+          cors: true
   add-task:
     handler: build/add-task.add
     memorySize: 128
@@ -66,6 +67,7 @@ functions:
       - http:
           method: put
           path: add
+          cors: true
   remove-task:
     handler: build/remove-task.remove
     memorySize: 128
@@ -75,3 +77,4 @@ functions:
       - http:
           method: delete
           path: remove
+          cors: true
