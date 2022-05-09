@@ -57,7 +57,15 @@ functions:
       - http:
           method: get
           path: list
-          cors: true
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+            allowCredentials: false
   add-task:
     handler: build/add-task.add
     memorySize: 128
@@ -67,7 +75,15 @@ functions:
       - http:
           method: put
           path: add
-          cors: true
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+            allowCredentials: false
   remove-task:
     handler: build/remove-task.remove
     memorySize: 128
@@ -77,4 +93,12 @@ functions:
       - http:
           method: delete
           path: remove
-          cors: true
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+            allowCredentials: false
