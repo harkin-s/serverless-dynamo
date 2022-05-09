@@ -11,7 +11,12 @@ export const add: APIGatewayProxyHandler = async (event, _context): Promise<APIG
 
     return {
         statusCode,
-        body
+        body,
+        headers: {
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
     };
 }
 
@@ -20,9 +25,7 @@ async function addTask(task: Task) {
     if (task.creator === null || task.taskDefinition === null) {
         return {
             statusCode: 400,
-            body: JSON.stringify("Null values found"),
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Credentials': true,
+            body: JSON.stringify("Null values found")
         }
     }
 
@@ -39,9 +42,7 @@ async function addTask(task: Task) {
         console.error(error)
         return {
             statusCode: 400,
-            body: JSON.stringify("Error adding item"),
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Credentials': true,
+            body: JSON.stringify("Error adding item")
         }
     }
 }

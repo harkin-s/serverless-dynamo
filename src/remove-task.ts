@@ -10,7 +10,12 @@ export const remove: APIGatewayProxyHandler = async (event, _context): Promise<A
 
     return {
         statusCode,
-        body
+        body,
+        headers: {
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        }
     };
 }
 
@@ -19,11 +24,7 @@ async function addTask(creator: string, id: string) {
     if (creator === null || id === null) {
         return {
             statusCode: 400,
-            body: JSON.stringify("Null values found"),
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Credentials': true,
-            },
+            body: JSON.stringify("Null values found")
         }
     }
 
@@ -40,21 +41,13 @@ async function addTask(creator: string, id: string) {
 
         return {
             statusCode: 200,
-            body: JSON.stringify({ message: "Item deleted", id }),
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Credentials': true,
-            },
+            body: JSON.stringify({ message: "Item deleted", id })
         }
     } catch (error) {
         console.error(error)
         return {
             statusCode: 400,
-            body: JSON.stringify("Error deleting item"),
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Credentials': true,
-            },
+            body: JSON.stringify("Error deleting item")
         }
     }
 }

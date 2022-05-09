@@ -34,23 +34,13 @@ async function listTasks(creator: string) {
         return {
             statusCode: 200,
             body: JSON.stringify(Items),
-            headers: {
-                "Access-Control-Allow-Headers": "Content-Type",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-            },
         }
 
     } catch (error) {
         console.error(error)
         return {
             statusCode: 500,
-            body: "Server error",
-            headers: {
-                "Access-Control-Allow-Headers": "Content-Type",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-            },
+            body: "Server error"
         };
 
     }
@@ -73,24 +63,14 @@ async function listAllTasks() {
 
         return {
             statusCode: 200,
-            body: JSON.stringify(scanResults),
-            headers: {
-                "Access-Control-Allow-Headers": "Content-Type",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-            },
+            body: JSON.stringify(scanResults)
         }
 
 
     } catch (error) {
         return {
             statusCode: 500,
-            body: "Server error",
-            headers: {
-                "Access-Control-Allow-Headers": "Content-Type",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-            },
+            body: "Server error"
         };
 
     }
