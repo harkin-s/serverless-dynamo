@@ -15,7 +15,7 @@ export const add: APIGatewayProxyHandler = async (event, _context): Promise<APIG
         headers: {
             "Access-Control-Allow-Headers": "Content-Type",
             "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT"
         },
     };
 }
@@ -31,7 +31,6 @@ async function addTask(task: Task) {
 
     try {
         const db = await getConnection();
-        console.log(tableName)
         await db.put({ Item: task, TableName: tableName }).promise()
 
         return {

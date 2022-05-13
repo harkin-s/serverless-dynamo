@@ -1,21 +1,31 @@
 <script>
+	import { onMount } from "svelte";
+
 	const baseURL =
 		"https://hw93br9xm1.execute-api.eu-west-1.amazonaws.com/live/";
-	let newItem = "";
+	let newItem = {
+		creator: "ma",
+		taskDefinition: "",
+	};
 
-	let todoList = [1, 2, 3];
+	let todoList = "";
 
-	async function getTodos() {
+	onMount(async () => {
 		const respose = await fetch(`${baseURL}list`, {
 			method: "GET",
 		});
-		console.log(respose);
-		todoList = respose.body;
-	}
+		const json = await respose.json();
+		todoList = json;
+	});
 
-	function addToList() {
-		todoList = [...todoList, { text: newItem, status: false }];
-		newItem = "";
+	async function addToList() {
+		const res = await fetch(`${baseURL}add`, {
+			method: "PUT",
+			body: newItem,
+		});
+
+		const json = await res.json();
+		result = JSON.stringify(json);
 	}
 
 	function removeFromList(index) {
@@ -24,20 +34,24 @@
 	}
 </script>
 
-<input bind:value={newItem} type="text" placeholder="new todo item.." />
+<input
+	bind:value={newItem.taskDefinition}
+	type="text"
+	placeholder="new todo item.."
+/>
 <button on:click={addToList}>Add</button>
 
 <br />
-{#await getTodos()}
-	<p>Getting todos</p>
-{:then todoList}
-	{#each todoList as item, index}
-		<input bind:checked={item.status} type="checkbox" />
-		<span class:checked={item.status}>{item.text}</span>
-		<span on:click={() => removeFromList(index)}>❌</span>
-		<br />
-	{/each}
-{/await}
+
+{#each todoList as item, index}
+	<input bind:checked={item.status} type="checkbox" />
+	<span class:checked={item.status}>{item.creator}</span>
+	<span>{item.taskDefinition}</span>
+	<span on:click={() => removeFromList(index.id)}>❌</span>
+	<br />
+{:else}
+	<p>wati</p>
+{/each}
 
 <style>
 	.checked {

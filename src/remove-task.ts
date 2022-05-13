@@ -14,7 +14,7 @@ export const remove: APIGatewayProxyHandler = async (event, _context): Promise<A
         headers: {
             "Access-Control-Allow-Headers": "Content-Type",
             "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT"
         }
     };
 }
