@@ -5,7 +5,7 @@ import { tableName } from "./config";
 export const list: APIGatewayProxyHandler = async (event, _context) => {
 
     const creator = event.queryStringParameters?.creator;
-    const { statusCode, body } = creator !== undefined ? await listTasks(creator) : await listAllTasks()
+    const { statusCode, body } = await listAllTasks(creator)
 
     return {
         statusCode,
@@ -46,10 +46,12 @@ async function listTasks(creator: string) {
     }
 }
 
-async function listAllTasks() {
+async function listAllTasks(creator) {
     try {
         const db = await getConnection();
-        let params = { TableName: tableName, ExclusiveStartKey: null };
+
+        let conditions = { FilterExpression: "creator = :cr", ExpressionAttributeValues: { "creator": { S: creator } } }
+        let params = { TableName: tableName, ExclusiveStartKey: null, ...(creator ? conditions : {}) };
         let items: any
         let scanResults = [];
 
