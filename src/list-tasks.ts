@@ -50,7 +50,7 @@ async function listAllTasks(creator) {
     try {
         const db = await getConnection();
 
-        let conditions = { FilterExpression: "creator = :cr", ExpressionAttributeValues: { "creator": { S: creator } } }
+        let conditions = { FilterExpression: "creator = :cr", ExpressionAttributeValues: { ":cr": { S: creator } } }
         let params = { TableName: tableName, ExclusiveStartKey: null, ...(creator ? conditions : {}) };
         let items: any
         let scanResults = [];
