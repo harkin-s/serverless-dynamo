@@ -18,35 +18,7 @@ export const list: APIGatewayProxyHandler = async (event, _context) => {
     };
 }
 
-async function listTasks(creator: string) {
-
-    try {
-
-        const db = await getConnection();
-        const params = {
-            TableName: tableName,
-            KeyConditionExpression: 'creator = :cr',
-            ExpressionAttributeValues: {
-                ':cr': creator
-            }
-        }
-        const { Items = [] } = await db.query(params).promise();
-        return {
-            statusCode: 200,
-            body: JSON.stringify(Items),
-        }
-
-    } catch (error) {
-        console.error(error)
-        return {
-            statusCode: 500,
-            body: "Server error"
-        };
-
-    }
-}
-
-async function listAllTasks(creator) {
+export async function listAllTasks(creator: any) {
     try {
         const db = await getConnection();
 
