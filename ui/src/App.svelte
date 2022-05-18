@@ -69,7 +69,11 @@
 <body>
 	<div class="container">
 		{#if newItem.creator}
-			{#await getItems() then}
+			{#await getItems()}
+				<div id="load-div">
+					<p>Loading...</p>
+				</div>
+			{:then}
 				<div id="newtask">
 					<input
 						bind:value={newItem.taskDefinition}
@@ -213,6 +217,9 @@
 		color: #ffffff;
 		cursor: pointer;
 		outline: none;
+		margin: 15px;
+	}
+	#load-div {
 		margin: 15px;
 	}
 </style>

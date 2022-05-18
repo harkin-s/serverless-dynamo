@@ -6,4 +6,4 @@ The Repo has a circle ci build lane which deployes changes on all commits to mas
 To run the UI use the script `dev` found in the package-json found in the ui folder.The UI is set up to target the remote API so you do not need to run the lambdas locally
 
 ### Test
-There are some tests for the API found in the test folder 
+There are some tests for the API found in the test folder.
