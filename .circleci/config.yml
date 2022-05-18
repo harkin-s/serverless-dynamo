@@ -7,7 +7,7 @@ jobs:
         - checkout
         - run: sudo npm i -g serverless
         - run: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && unzip awscliv2.zip && sudo ./aws/install
-        - run: /usr/local/bin/aws s3api create-bucket --bucket svelete-task-app --acl public-read
+        - run: aws s3api create-bucket --bucket svelete-task-app --acl public-read
         - run: yarn
         - run: yarn run test
         - run: yarn run ci:deploy
